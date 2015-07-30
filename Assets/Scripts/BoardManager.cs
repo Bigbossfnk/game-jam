@@ -59,45 +59,23 @@ namespace Completed
 
 				instance.transform.SetParent(boardHolder);
 			}
-
-			// First find a center for your bounds.
-			Vector3 center = Vector3.zero;
-			
-			foreach (Transform child in boardHolder.transform)
-			{
-
-				center += child.GetComponent<Renderer>().bounds.center;
-			}
-			center /= boardHolder.transform.childCount; //center is average center of children
-			
-			//Now you have a center, calculate the bounds by creating a zero sized 'Bounds', 
-			Bounds bounds = new Bounds(center,Vector3.zero); 
-			
-			foreach (Transform child in boardHolder.transform)
-			{
-				bounds.Encapsulate(child.GetComponent<Renderer>().bounds);
-			}
-
-				                   Debug.Log (bounds.size.x / 2);
-				                   Debug.Log (bounds.size.z / 2);
 		}
 
 		void Awake()
 		{
 			InitialiseList();
 			BoardSetup();
-
-			Debug.Log("Columns: " + columns);
-			Debug.Log("Rows   : " + rows);
 		}
 
 		int speed = 50;
 		void Update(){
-			if (Input.GetKey(KeyCode.LeftArrow)){
-				boardHolder.transform.RotateAround (cameraTarget.transform.position, Vector3.up, speed * Time.deltaTime);
+			if (Input.GetKey(KeyCode.Q))
+			{
+				Camera.main.transform.RotateAround (cameraTarget.transform.position, Vector3.up, speed * Time.deltaTime);
 			}
-			if (Input.GetKey(KeyCode.RightArrow)){
-				boardHolder.transform.RotateAround (cameraTarget.transform.position, Vector3.up, -speed * Time.deltaTime);
+			if (Input.GetKey(KeyCode.E))
+			{
+				Camera.main.transform.RotateAround (cameraTarget.transform.position, Vector3.up, -speed * Time.deltaTime);
 			}
 		}
 	}
